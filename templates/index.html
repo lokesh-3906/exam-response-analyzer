@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exam Response Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <main>
+      <h1>Exam Response Analyzer</h1>
+      <p>Upload exam responses to begin.</p>
+      <form action="{{ url_for('result') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Analyze</button>
+      </form>
+    </main>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
