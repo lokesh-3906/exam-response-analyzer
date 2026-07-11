@@ -1,117 +1,29 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+
+<head>
     <title>Exam Response Analyzer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  </head>
-  <body>
-    <div class="background" aria-hidden="true">
-      <span class="orb orb-one"></span>
-      <span class="orb orb-two"></span>
-      <span class="orb orb-three"></span>
-    </div>
+</head>
 
-    <main class="app-shell">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">AI-powered assessment workflow</p>
-          <h1>Exam Response Analyzer</h1>
-          <p class="hero-subtitle">
-            Upload response sheets or answer keys and calculate scores in a polished,
-            professional experience.
-          </p>
-          <div class="hero-badges">
-            <span>Instant scoring</span>
-            <span>PDF-ready</span>
-            <span>Custom marking</span>
-          </div>
-        </div>
-      </section>
+<body>
 
-      <section class="upload-card">
-        <form id="analysis-form" action="{{ url_for('result') }}" method="post" enctype="multipart/form-data">
-          <div class="mode-switcher" role="tablist" aria-label="Upload mode">
-            <button type="button" class="mode-btn active" data-mode="single">Single PDF</button>
-            <button type="button" class="mode-btn" data-mode="dual">Response + Answer Key</button>
-          </div>
+<h1>Exam Response Analyzer</h1>
 
-          <div class="field-group">
-            <label for="exam-type">Marking Scheme</label>
-            <select id="exam-type" name="exam_type">
-              <option value="ap-eamcet">AP EAMCET</option>
-              <option value="ts-eamcet">TS EAMCET</option>
-              <option value="jee-main">JEE Main</option>
-              <option value="neet">NEET</option>
-              <option value="custom">Custom</option>
-            </select>
-          </div>
+<form action="/upload" method="POST" enctype="multipart/form-data">
 
-          <div id="custom-marks" class="custom-marks hidden">
-            <div class="field-group">
-              <label for="correct-marks">Correct Marks</label>
-              <input id="correct-marks" name="correct_marks" type="number" min="0" step="0.5" value="1">
-            </div>
-            <div class="field-group">
-              <label for="wrong-marks">Wrong Marks</label>
-              <input id="wrong-marks" name="wrong_marks" type="number" min="0" step="0.5" value="0">
-            </div>
-            <div class="field-group">
-              <label for="skipped-marks">Skipped Marks</label>
-              <input id="skipped-marks" name="skipped_marks" type="number" min="0" step="0.5" value="0">
-            </div>
-          </div>
+    <input
+        type="file"
+        name="pdf"
+        accept=".pdf"
+        required>
 
-          <div class="upload-grid" id="upload-grid" data-mode="single">
-            <div class="drop-zone single-zone">
-              <input id="single-file" name="single_file" type="file" accept=".pdf,application/pdf" hidden>
-              <label class="drop-zone-label" for="single-file">
-                <span class="drop-icon">📄</span>
-                <span class="drop-title">Upload a single PDF</span>
-                <span class="drop-subtitle">Drag and drop or browse</span>
-              </label>
-              <p class="selected-file" id="single-file-name">No file selected</p>
-            </div>
+    <br><br>
 
-            <div class="drop-zone dual-zone">
-              <input id="response-file" name="response_file" type="file" accept=".pdf,application/pdf" hidden>
-              <label class="drop-zone-label" for="response-file">
-                <span class="drop-icon">📝</span>
-                <span class="drop-title">Upload response sheet PDF</span>
-                <span class="drop-subtitle">Drag and drop or browse</span>
-              </label>
-              <p class="selected-file" id="response-file-name">No file selected</p>
-            </div>
+    <button type="submit">
+        Upload PDF
+    </button>
 
-            <div class="drop-zone dual-zone">
-              <input id="answer-key-file" name="answer_key_file" type="file" accept=".pdf,application/pdf" hidden>
-              <label class="drop-zone-label" for="answer-key-file">
-                <span class="drop-icon">✅</span>
-                <span class="drop-title">Upload answer key PDF</span>
-                <span class="drop-subtitle">Drag and drop or browse</span>
-              </label>
-              <p class="selected-file" id="answer-key-file-name">No file selected</p>
-            </div>
-          </div>
+</form>
 
-          <div class="actions">
-            <button type="submit" class="btn btn-primary">Calculate Score</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-          </div>
-
-          <p class="status-message" id="status-message" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
-
-    <div class="loading-overlay" id="loading-overlay" aria-hidden="true">
-      <div class="loader-card">
-        <div class="spinner"></div>
-        <p>Preparing your analysis...</p>
-      </div>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-  </body>
+</body>
 </html>
